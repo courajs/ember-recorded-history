@@ -1,11 +1,13 @@
 # ember-recorded-history
 
-Ever wanted to have some logic depend on where the user's come from? For
-example, a settings page could redirect on save back to where the user
-was before. Or, a view route where you cycle through many models could
-have a close button which takes you back to whichever route you were on
-previously, rather than one step back which would be the current route
-with the previous model.
+Ever wanted to have some logic depend on the user's navigation history
+in your app?
+
+After submitting a form, you could redirect the user to where they were
+before.
+
+Or a details route, where you cycle through many models, could offer a
+close button which returns to the last _different_ route they were on.
 
 ## Installation
 
@@ -73,20 +75,10 @@ The service also provides 2 useful methods:
   user navigated directly there. This discards future entries, and
   creates a new entry for the passed route.
 
-### `link-to-history-entry` helper
+### TODO: Components
 
-Because `link-to` requires you to pass the proper number of dynamic
-segments, I've included a version which just takes a `HistoryEntry`.
-Here's an over-engineered forward button:
-```hbs
-{{link-to-history-entry "Go forward" history.futureEntries.firstObject}}
-```
-Or, the block form:
-```hbs
-{{#link-to-history-entry history.futureEntries.firstObject}}
-  <button>Go forward</button>
-{{/link-to-history-entry}}
-```
+It would be nice to have a version of `link-to` that can take a
+`HistoryEntry`.
 
 ## Usage Example
 
@@ -103,14 +95,20 @@ export default Ember.Controller.extend({
     return this.get('history.pastEntries')
       .rejectBy('route', 'photos.view')
       .get('lastObject');
-  })
+  }),
+
+  actions: {
+    returnToPrevious() {
+      this.get('history').transitionTo(this.get('previousRoute'));
+    }
+  }
 });
 ```
 
 ```hbs
-{{! photos/view/temlate.hbs }}
+{{! photos/view/template.hbs }}
 {{#if previousRoute}}
-  {{link-to-history-entry "<- Return" previousRoute}}
+  <button {{action "returnToPrevious"}}>⬅︎ Return</button>
 {{/if}}
 <img src={{model.url}}>
 ```
