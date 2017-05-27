@@ -1,9 +1,8 @@
-import _ from 'lodash';
 
 export function stateForNewEntry(currentState, entry) {
   let { history, position } = currentState;
 
-  let already = _.findIndex(history, {uuid: entry.uuid});
+  let already = history.findIndex((state) => state.uuid === entry.uuid);
 
   if (already >= 0) {
     return {
@@ -20,7 +19,7 @@ export function stateForNewEntry(currentState, entry) {
 }
 
 export function restoreState(loadedState, entry) {
-  let position = _.findIndex(loadedState.history, {uuid: entry.uuid});
+  let position = loadedState.history.findIndex((state) => state.uuid === entry.uuid);
 
   if (position >= 0) {
     return {
