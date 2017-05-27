@@ -53,8 +53,13 @@ The service provides 3 main properties:
   furthest in the future. These are where the user would end up if they
   used the forward button.
 
-TODO: `transitionTo` and/or `returnTo` methods?
-
+The service also provides 2 useful methods:
+- `returnTo(entry)`: Transition to an existing history entry, without
+  modifying the history. As if the user pressed the back/forward buttons
+  to return to that route.
+- `transitionTo(entry)`: Transition to the specified state, as if the
+  user navigated directly there. This discards future entries, and
+  creates a new entry for the passed route.
 
 ### `link-to-history-entry` helper
 
