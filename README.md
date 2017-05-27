@@ -9,6 +9,11 @@ before.
 Or a details route, where you cycle through many models, could offer a
 close button which returns to the last _different_ route they were on.
 
+Note: I've never tested this with `Ember.HashLocation`. If you try it, or
+would like to help ensure a graceful fallback behavior, please let me
+know! I'm available on the [Ember Community
+Slack](https://emberjs.com/community/).
+
 ## Installation
 
 1. `ember install ember-recorded-history`
