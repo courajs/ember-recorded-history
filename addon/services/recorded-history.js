@@ -52,24 +52,31 @@ export default Service.extend({
     return this.get('history').slice(this.get('position') + 1);
   }),
 
-  arrive(t) {
-    let { path, uuid } = window.history.state;
-    let routeName = t.name;
+  arrive(infos) {
+    let leaf = infos[infos.length - 1];
+    let route = leaf.name;
 
-    let state = this.get('state');
-    let newEntry = {
-      uuid,
-      path,
-      route: routeName
-    };
+    let { path, uuid } = window.history.state;
 
     // This is private API. Someday when the Router Service is complete,
     // we should be able to use that instead.
     // Router Service RFC:
     // https://github.com/emberjs/rfcs/blob/master/text/0095-router-service.md
-    if (t._names.length > 0) {
-      newEntry.param = t.params[t._names[0]];
-    }
+    let params = [];
+    infos.forEach(function(info) {
+      for (let name of info._names) {
+        params.push(info.params[name]);
+      }
+    });
+
+    let state = this.get('state');
+    let newEntry = {
+      uuid,
+      path,
+      route,
+      params
+    };
+
     let newState = stateForNewEntry(state, newEntry);
     this.set('state', newState);
   }

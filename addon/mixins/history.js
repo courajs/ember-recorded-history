@@ -12,6 +12,6 @@ export default Ember.Mixin.create({
   },
 
   handleRouteArrival: function(infos) {
-    this.get('recordedHistory').arrive(infos[infos.length - 1]);
+    this.get('recordedHistory').arrive(infos);
   }
 });
