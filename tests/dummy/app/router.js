@@ -7,6 +7,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('numbers', function() {
+    this.route('show', { path: ':number' });
+  });
+  this.route('bucket', { path: ':bucket' }, function() {
+    this.route('letter', { path: ':letter' });
+  });
 });
 
 export default Router;

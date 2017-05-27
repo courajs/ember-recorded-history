@@ -1,0 +1,13 @@
+<div>
+  <p>Numbers:</p>
+  {{#each numbers as |number|}}
+    {{link-to number "numbers.show" number}}
+  {{/each}}
+</div>
+<div>
+  <p>Buckets:</p>
+  {{#each buckets as |bucket|}}
+    {{link-to bucket "bucket" bucket}}
+  {{/each}}
+</div>
+{{outlet}}

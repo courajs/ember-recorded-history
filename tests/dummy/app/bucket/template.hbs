@@ -1,0 +1,5 @@
+<h1>{{model.bucket}}</h1>
+{{#each model.letters as |letter|}}
+  {{link-to letter "bucket.letter" letter}}
+{{/each}}
+{{outlet}}
