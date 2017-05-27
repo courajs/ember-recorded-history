@@ -30,7 +30,19 @@ export default Router;
 ```
 
 3. If you are using Ember 2.13, you'll need to use the `stable-history`
-   location to work around a bug.
+   location to work around a bug, which creates duplicate entries when
+  the app refreshes:
+```js
+// app/router.js
+import Ember from 'ember';
+import { HistoryMixin } from 'ember-recorded-history';
+
+const Router = Ember.Router.extend(HistoryMixin, {
+  location: 'stable-history',
+  // ...
+});
+```
+
 4. If you're using < Ember 2.13, you'll need to use the `unique-history`
    location to backfill unique history state support.
 

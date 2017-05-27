@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import config from './config/environment';
+import { HistoryMixin } from 'ember-recorded-history';
 
-const Router = Ember.Router.extend({
-  location: config.locationType,
+const Router = Ember.Router.extend(HistoryMixin, {
+  location: 'stable-history',
   rootURL: config.rootURL
 });
 
