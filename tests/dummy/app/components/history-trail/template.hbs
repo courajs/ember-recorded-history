@@ -1,3 +1,5 @@
 {{#each history.history as |entry|}}
-  [{{entry.route}}: {{entry.params}}]
+  <a {{action "returnTo" entry}} href="#">
+    [{{entry.route}}: {{entry.params}}]
+  </a>
 {{/each}}

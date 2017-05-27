@@ -52,7 +52,18 @@ export default Service.extend({
     return this.get('history').slice(this.get('position') + 1);
   }),
 
-  arrive(infos) {
+  returnTo(entry) {
+    let destination = this.get('history').findIndex((state) => state.uuid === entry.uuid);
+    if (destination === -1) {
+      console.error("RecordedHistory#returnTo was passed an entry not from the history");
+      return;
+    }
+
+    let offset = destination - this.get('position');
+    window.history.go(offset);
+  },
+
+  _arrive(infos) {
     let leaf = infos[infos.length - 1];
     let route = leaf.name;
 
