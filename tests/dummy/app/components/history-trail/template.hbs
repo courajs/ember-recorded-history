@@ -1,4 +1,12 @@
-{{#each history.entries as |entry|}}
+{{#each history.pastEntries as |entry|}}
+  <a {{action "returnTo" entry}} href="#">
+    [{{entry.route}}: {{entry.params}}]
+  </a>
+{{/each}}
+
+<strong>[{{history.currentEntry.route}}: {{history.currentEntry.params}}]</strong>
+
+{{#each history.futureEntries as |entry|}}
   <a {{action "returnTo" entry}} href="#">
     [{{entry.route}}: {{entry.params}}]
   </a>

@@ -41,7 +41,7 @@ export default Service.extend({
   },
 
   currentEntry: Ember.computed('state', function() {
-    return this.get('entries').objectAt(this.get('position'));
+    return this.get('entries')[this.get('position')];
   }),
 
   pastEntries: Ember.computed('state', function() {
