@@ -7,10 +7,12 @@ import {
 const {
   Service,
   computed,
+  inject,
   observer
 } = Ember;
 
 export default Service.extend({
+  router: inject.service('-routing'),
   entries: [],
   position: 0,
 
@@ -51,6 +53,10 @@ export default Service.extend({
   futureEntries: Ember.computed('state', function() {
     return this.get('entries').slice(this.get('position') + 1);
   }),
+
+  transitionTo({route, params}) {
+    this.get('router').transitionTo(route, params);
+  },
 
   returnTo(entry) {
     let destination = this.get('entries').findIndex((state) => state.uuid === entry.uuid);
