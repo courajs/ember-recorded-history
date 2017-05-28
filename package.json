@@ -1,6 +1,6 @@
 {
   "name": "ember-recorded-history",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A service to read the past and future entries of a user's history within your app",
   "keywords": [
     "ember-addon"
