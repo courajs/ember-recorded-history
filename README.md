@@ -63,7 +63,7 @@ A `HistoryEntry` represents a unique visit to a route. It has 4 properties:
 - `params`: An array of params for routes with dynamic segments
 
 ### The `recorded-history` service
-The service provides 3 main properties:
+The service provides 5 main properties:
 - `currentEntry`: A `HistoryEntry` representing the current route. This
   can be leveraged to store state associated with this route.
 - `pastEntries`: An array of `HistoryEntries`, oldest to most recent.
@@ -71,6 +71,10 @@ The service provides 3 main properties:
 - `futureEntries`: An array of `HistoryEntries`, from closest to
   furthest in the future. These are where the user would end up if they
   used the forward button.
+- `entries`: All history entries. Equivalent to
+  `pastEntries.concat(currentEntry, futureEntries)`.
+- `position`: The index of the current history entry. `currentEntry` is
+  equivalent to `entries[position]`.
 
 The service also provides 2 useful methods:
 - `returnTo(entry)`: Transition to an existing history entry, without

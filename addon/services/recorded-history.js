@@ -11,16 +11,16 @@ const {
 } = Ember;
 
 export default Service.extend({
-  history: [],
+  entries: [],
   position: 0,
 
-  state: computed('position', 'history.[]', {
+  state: computed('position', 'entries.[]', {
     get() {
-      return this.getProperties('history', 'position');
+      return this.getProperties('entries', 'position');
     },
     set(key, val) {
       let newVal = {
-        history: val.history,
+        entries: val.entries,
         position: val.position
       };
       this.setProperties(newVal);
@@ -41,19 +41,19 @@ export default Service.extend({
   },
 
   currentEntry: Ember.computed('state', function() {
-    return this.get('history').objectAt(this.get('position'));
+    return this.get('entries').objectAt(this.get('position'));
   }),
 
   pastEntries: Ember.computed('state', function() {
-    return this.get('history').slice(0, this.get('position'));
+    return this.get('entries').slice(0, this.get('position'));
   }),
 
   futureEntries: Ember.computed('state', function() {
-    return this.get('history').slice(this.get('position') + 1);
+    return this.get('entries').slice(this.get('position') + 1);
   }),
 
   returnTo(entry) {
-    let destination = this.get('history').findIndex((state) => state.uuid === entry.uuid);
+    let destination = this.get('entries').findIndex((state) => state.uuid === entry.uuid);
     if (destination === -1) {
       console.error("RecordedHistory#returnTo was passed an entry not from the history");
       return;

@@ -13,72 +13,72 @@ let four = { uuid: 4 };
 
 test('#newState constructs a state for a new entry', function(assert) {
   let state = {
-    history: [],
+    entries: [],
     position: 0
   };
   let result = stateForNewEntry(state, one);
   assert.deepEqual(result, {
-    history: [one],
+    entries: [one],
     position: 0
   });
 });
 
 test("#newState adds a new entry to the end of the history", function(assert) {
   let state = {
-    history: [one],
+    entries: [one],
     position: 0
   };
   let result = stateForNewEntry(state, two);
   assert.deepEqual(result, {
-    history: [one, two],
+    entries: [one, two],
     position: 1
   });
 });
 
 test("#newState backtracks position, but preserves future entries for an existing state", function(assert) {
   let state = {
-    history: [one, two],
+    entries: [one, two],
     position: 1
   };
   let result = stateForNewEntry(state, one);
   assert.deepEqual(result, {
-    history: [one, two],
+    entries: [one, two],
     position: 0
   });
 });
 
 test("#newState discards future entries when visiting a new state", function(assert) {
   let state = {
-    history: [one, two, three],
+    entries: [one, two, three],
     position: 1
   };
   let result = stateForNewEntry(state, four);
   assert.deepEqual(result, {
-    history: [one, two, four],
+    entries: [one, two, four],
     position: 2
   });
 });
 
 test("restoreState sets the correct position if we are within recorded state", function(assert) {
   let state = {
-    history: [one, two, three],
+    entries: [one, two, three],
     position: 2
   };
   let result = restoreState(state, two);
   assert.deepEqual(result, {
-    history: [one, two, three],
+    entries: [one, two, three],
     position: 1
   });
 });
 
 test("restoreState discards loaded state if it can't find the current entry", function(assert) {
   let state = {
-    history: [one, two],
+    entries: [one, two],
     position: 1
   };
   let result = restoreState(state, three);
   assert.deepEqual(result, {
-    history: [three],
+    entries: [three],
     position: 0
   });
 });

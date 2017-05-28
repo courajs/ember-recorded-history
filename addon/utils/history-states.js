@@ -1,34 +1,34 @@
 
 export function stateForNewEntry(currentState, entry) {
-  let { history, position } = currentState;
+  let { entries, position } = currentState;
 
-  let already = history.findIndex((state) => state.uuid === entry.uuid);
+  let already = entries.findIndex((state) => state.uuid === entry.uuid);
 
   if (already >= 0) {
     return {
-      history,
+      entries,
       position: already
     };
   } else {
-    history = history.slice(0, position + 1).concat(entry);
+    entries = entries.slice(0, position + 1).concat(entry);
     return {
-      history,
-      position: history.length - 1
+      entries,
+      position: entries.length - 1
     };
   }
 }
 
 export function restoreState(loadedState, entry) {
-  let position = loadedState.history.findIndex((state) => state.uuid === entry.uuid);
+  let position = loadedState.entries.findIndex((state) => state.uuid === entry.uuid);
 
   if (position >= 0) {
     return {
-      history: loadedState.history,
+      entries: loadedState.entries,
       position
     };
   } else {
     return {
-      history: [entry],
+      entries: [entry],
       position: 0
     };
   }
