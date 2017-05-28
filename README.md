@@ -84,10 +84,14 @@ The service also provides 2 useful methods:
   user navigated directly there. This discards future entries, and
   creates a new entry for the passed route.
 
-### TODO: Components
-
+## TODO
+### Components
 It would be nice to have a version of `link-to` that can take a
 `HistoryEntry`.
+### Check replace support
+This probably doesn't work correctly with `replaceWith`
+### Query param support
+Check with `replace: true`
 
 ## Usage Example
 
