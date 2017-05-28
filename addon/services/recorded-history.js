@@ -81,8 +81,10 @@ export default Service.extend({
     // https://github.com/emberjs/rfcs/blob/master/text/0095-router-service.md
     let params = [];
     infos.forEach(function(info) {
-      for (let name of info._names) {
-        params.push(info.params[name]);
+      if (info._names) {
+        for (let name of info._names) {
+          params.push(info.params[name]);
+        }
       }
     });
 
