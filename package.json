@@ -3,7 +3,11 @@
   "version": "1.0.1",
   "description": "A service to read the past and future entries of a user's history within your app",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "emberjs",
+    "router",
+    "history",
+    "service"
   ],
   "license": "MIT",
   "author": "",
@@ -11,7 +15,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/courajs/ember-recorded-history",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
