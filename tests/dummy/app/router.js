@@ -14,6 +14,8 @@ Router.map(function() {
   this.route('bucket', { path: ':bucket' }, function() {
     this.route('letter', { path: ':letter' });
   });
+  this.route('left');
+  this.route('right');
 });
 
 export default Router;
