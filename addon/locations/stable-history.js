@@ -14,12 +14,14 @@
 import Ember from 'ember';
 
 const { 
+  HistoryLocation,
+  inject,
   get,
-  set,
-  HistoryLocation
+  set
 } = Ember;
 
 export default HistoryLocation.extend({
+  recordedHistory: inject.service(),
   /**
     Used to set state on first call to setURL
 
@@ -42,5 +44,10 @@ export default HistoryLocation.extend({
     } else {
       this.replaceState(path);
     }
+  },
+
+  replaceURL() {
+    this._super(...arguments);
+    this.get('recordedHistory')._markReplaced();
   }
 });

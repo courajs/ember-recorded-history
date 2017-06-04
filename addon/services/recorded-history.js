@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 import {
-  stateForNewEntry
+  transitionToEntry,
+  replaceEntry
 } from 'ember-recorded-history/utils/history-states';
 
 const {
@@ -38,7 +39,12 @@ export default Service.extend({
     this._super(...arguments);
     let loadedState = sessionStorage.getItem('ember-recorded-history');
     if (loadedState) {
-      this.set('state', JSON.parse(loadedState));
+      let state = JSON.parse(loadedState);
+      this.set('state', state);
+      Ember.assert("The current history entry doesn't match up with the loaded history. This is a bug in ember-recorded-history, please report it: https://github.com/courajs/ember-recorded-history/issues", (
+          state.entries.length === 0 ||
+          state.entries[state.position].uuid === history.state.uuid
+      ));
     }
   },
 
@@ -69,7 +75,12 @@ export default Service.extend({
     window.history.go(offset);
   },
 
+  _markReplaced() {
+    this.set('replaced', true);
+  },
+
   _arrive(infos) {
+    console.log('arrive');
     let leaf = infos[infos.length - 1];
     let route = leaf.name;
 
@@ -96,7 +107,13 @@ export default Service.extend({
       params
     };
 
-    let newState = stateForNewEntry(state, newEntry);
-    this.set('state', newState);
+    if (this.get('replaced')) {
+      let newState = replaceEntry(state, newEntry);
+      this.set('state', newState);
+      this.set('replaced', false);
+    } else {
+      let newState = transitionToEntry(state, newEntry);
+      this.set('state', newState);
+    }
   }
 });

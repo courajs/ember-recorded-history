@@ -1,5 +1,5 @@
 
-export function stateForNewEntry(currentState, entry) {
+export function transitionToEntry(currentState, entry) {
   let { entries, position } = currentState;
 
   let already = entries.findIndex((state) => state.uuid === entry.uuid);
@@ -16,6 +16,15 @@ export function stateForNewEntry(currentState, entry) {
       position: entries.length - 1
     };
   }
+}
+
+export function replaceEntry(currentState, entry) {
+  let { entries, position } = currentState;
+  entries = entries.slice(0, position).concat(entry);
+  return {
+    entries,
+    position
+  };
 }
 
 export function restoreState(loadedState, entry) {
