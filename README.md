@@ -17,7 +17,7 @@ Slack](https://emberjs.com/community/).
 ## Installation
 
 1. `ember install ember-recorded-history`
-2. Include the router mixin:
+2. Include the router mixin, and use the `tracking-history` location:
 ```js
 // app/router.js
 import Ember from 'ember';
@@ -25,7 +25,7 @@ import config from './config/environment';
 import { HistoryMixin } from 'ember-recorded-history';
 
 const Router = Ember.Router.extend(HistoryMixin, {
-  location: config.locationType,
+  location: 'tracking-history',
   rootURL: config.rootURL
 });
 
@@ -35,23 +35,6 @@ Router.map(function() {
 
 export default Router;
 ```
-
-3. If you are using Ember 2.13, you'll need to use the `stable-history`
-   location to work around a bug, which creates duplicate entries when
-  the app refreshes:
-```js
-// app/router.js
-import Ember from 'ember';
-import { HistoryMixin } from 'ember-recorded-history';
-
-const Router = Ember.Router.extend(HistoryMixin, {
-  location: 'stable-history',
-  // ...
-});
-```
-
-4. If you're using < Ember 2.13, you'll need to use the `unique-history`
-   location to backfill unique history state support.
 
 ## Docs
 
@@ -112,7 +95,7 @@ export default Ember.Controller.extend({
 
   actions: {
     returnToPrevious() {
-      this.get('history').transitionTo(this.get('previousRoute'));
+      this.get('history').returnTo(this.get('previousRoute'));
     }
   }
 });
