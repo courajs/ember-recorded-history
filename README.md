@@ -1,5 +1,12 @@
 # ember-recorded-history
 
+NOTE! This is still alpha, I probably shouldn't have released 1.0 yet...
+
+Known issues:
+- NO query param support
+- Buggy when navigating from one route to a previous instance of
+  the same route.
+
 Ever wanted to have some logic depend on the user's navigation history
 in your app?
 
