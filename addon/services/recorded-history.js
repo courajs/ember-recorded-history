@@ -39,7 +39,6 @@ export default Service.extend({
     this._super(...arguments);
     let loadedState = sessionStorage.getItem('ember-recorded-history');
     if (loadedState) {
-      debugger;
       let state = JSON.parse(loadedState);
       this.set('state', state);
       Ember.assert("The current history entry doesn't match up with the loaded history. This is a bug in ember-recorded-history, please report it: https://github.com/courajs/ember-recorded-history/issues", (
@@ -81,7 +80,6 @@ export default Service.extend({
   },
 
   _arrive(infos) {
-    debugger;
     let leaf = infos[infos.length - 1];
     let route = leaf.name;
 
